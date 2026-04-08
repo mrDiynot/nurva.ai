@@ -30,9 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-)pd+%%whwpql(8pj4+p_(b1krx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-# Allow hosts from environment or default
-ALLOWED_HOSTS_STR = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1')
-ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS_STR.split(',')] if ALLOWED_HOSTS_STR else ['localhost']
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 
 # Application definition
@@ -123,21 +121,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-# CSRF & Security
-CSRF_TRUSTED_ORIGINS = [
-    'https://nurvaai.com',
-    'https://www.nurvaai.com',
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
-]
-
-# Security settings for production
-if not DEBUG:
-    SECURE_SSL_REDIRECT = False  # Set to True when using HTTPS
-    SESSION_COOKIE_SECURE = False  # Set to True when using HTTPS
-    CSRF_COOKIE_SECURE = False  # Set to True when using HTTPS
-    SECURE_HSTS_SECONDS = 0  # Set to 31536000 when using HTTPS
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = False
-    SECURE_HSTS_PRELOAD = False
