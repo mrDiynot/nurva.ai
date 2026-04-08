@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile — Nurva.AI</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --forest: #4B1D5A;
+            --forest-mid: #6B3D7A;
+            --cream: #F8F5F2;
+            --sand: #E8E0EA;
+            --charcoal: #1A1A1A;
+            --mist: #8A7A90;
+            --rose: #C4788A;
+            --strat: #D4A0B0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+        }
+
+        /* NAV */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(248, 245, 242, 0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(75, 29, 90, 0.1);
+            padding: 16px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--forest);
+            letter-spacing: 0.05em;
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            color: var(--rose);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--mist);
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--forest);
+        }
+
+        .nav-cta {
+            background: var(--forest);
+            color: var(--cream);
+            border: none;
+            border-radius: 24px;
+            padding: 10px 24px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+        }
+
+        .nav-cta:hover {
+            background: var(--forest-mid);
+        }
+
+        /* MAIN CONTAINER */
+        .profile-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .profile-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--forest);
+            margin-bottom: 8px;
+        }
+
+        .profile-header p {
+            font-size: 14px;
+            color: var(--mist);
+            font-weight: 300;
+        }
+
+        /* CARDS GRID */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(75, 29, 90, 0.1);
+            border: 1px solid var(--sand);
+        }
+
+        .card-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--rose);
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--forest);
+            margin-bottom: 12px;
+        }
+
+        .card-value {
+            font-size: 14px;
+            color: var(--charcoal);
+            margin-bottom: 16px;
+        }
+
+        .card-meta {
+            font-size: 12px;
+            color: var(--mist);
+            line-height: 1.6;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            margin-top: 12px;
+        }
+
+        .status-active {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .status-free {
+            background: #FFF3E0;
+            color: #F57C00;
+        }
+
+        .status-expired {
+            background: #FFEBEE;
+            color: #C62828;
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            margin-top: 12px;
+        }
+
+        .btn-primary {
+            background: var(--forest);
+            color: var(--cream);
+        }
+
+        .btn-primary:hover {
+            background: var(--forest-mid);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--rose);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #A85A6E;
+        }
+
+        .btn-danger {
+            background: #FFEBEE;
+            color: #C62828;
+            border: 1px solid #F5C6C6;
+        }
+
+        .btn-danger:hover {
+            background: #FEE5E5;
+        }
+
+        /* PAYMENT HISTORY */
+        .payments-section {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(75, 29, 90, 0.1);
+            border: 1px solid var(--sand);
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--forest);
+            margin-bottom: 24px;
+        }
+
+        .payment-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .payment-table th {
+            text-align: left;
+            padding: 12px;
+            background: var(--cream);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--forest);
+            border-bottom: 1px solid var(--sand);
+        }
+
+        .payment-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid var(--sand);
+            font-size: 13px;
+        }
+
+        .payment-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .payment-status {
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 6px;
+            display: inline-block;
+            font-size: 11px;
+        }
+
+        .payment-status.succeeded {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .payment-status.failed {
+            background: #FFEBEE;
+            color: #C62828;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--mist);
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                padding: 16px 24px;
+            }
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-table {
+                font-size: 12px;
+            }
+
+            .payment-table th,
+            .payment-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="{% url 'chat:home' %}" class="nav-logo">Nurva<span>.AI</span></a>
+        <ul class="nav-links">
+            <li><a href="{% url 'chat:home' %}">Home</a></li>
+            <li><a href="{% url 'chat:chatbot' %}">Chatbot</a></li>
+            <li><a href="{% url 'chat:profile' %}" style="color: var(--forest); font-weight: 600;">Profile</a></li>
+            <li><a href="{% url 'chat:logout' %}">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>Your Profile</h1>
+            <p>Welcome, {{ user.first_name|default:user.username }}</p>
+        </div>
+
+        {% if messages %}
+        {% for message in messages %}
+        <div
+            style="background: #E8F5E9; border: 1px solid #C8E6C9; color: #2E7D32; padding: 12px 14px; border-radius: 8px; margin-bottom: 20px; font-size: 13px;">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <!-- SUBSCRIPTION STATUS CARDS -->
+        <div class="profile-grid">
+            <!-- Account Status -->
+            <div class="profile-card">
+                <div class="card-label">Account</div>
+                <div class="card-title">{{ user.first_name|default:user.username }}</div>
+                <div class="card-value">{{ user.email }}</div>
+                <div class="card-meta">
+                    Member since <strong>{{ user.date_joined|date:"M d, Y" }}</strong>
+                </div>
+            </div>
+
+            <!-- Subscription Status -->
+            <div class="profile-card">
+                <div class="card-label">Subscription</div>
+                {% if is_paid %}
+                <div class="card-title">Premium</div>
+                {% if subscription %}
+                <div class="card-value">{{ subscription.get_plan_display }}</div>
+                <div class="card-meta">
+                    Active until <strong>{{ subscription.current_period_end|date:"M d, Y" }}</strong><br>
+                    <strong>{{ subscription.days_remaining }}</strong> days remaining
+                </div>
+                <span class="status-badge status-active">✓ Active</span>
+                {% else %}
+                <div class="card-meta">Subscription details not available</div>
+                {% endif %}
+                {% else %}
+                <div class="card-title">Free Plan</div>
+                <div class="card-value">{{ profile.free_messages_used }}/{{ profile.max_free_messages }} messages used
+                </div>
+                <div class="card-meta">Upgrade to unlock unlimited access</div>
+                <span class="status-badge status-free">Free Tier</span>
+                <br>
+                <a href="{% url 'chat:chatbot' %}" class="btn btn-primary">Upgrade Now</a>
+                {% endif %}
+            </div>
+
+            <!-- Message Usage -->
+            {% if not is_paid %}
+            <div class="profile-card">
+                <div class="card-label">Free Trial</div>
+                <div class="card-title">Messages</div>
+                <div class="card-value">
+                    <strong>{{ profile.messages_remaining }}</strong> / {{ profile.max_free_messages }} remaining
+                </div>
+                <div class="card-meta">
+                    You can send <strong>{{ profile.messages_remaining }}</strong> more free messages before upgrading.
+                </div>
+                <div
+                    style="width: 100%; background: var(--sand); border-radius: 10px; height: 8px; margin-top: 12px; overflow: hidden;">
+                    <div
+                        style="background: var(--forest); height: 100%; width: {{ profile.free_messages_used|default:0 }}%; transition: width 0.3s;">
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- PAYMENT HISTORY -->
+        <div class="payments-section">
+            <h2 class="section-title">Payment History</h2>
+
+            {% if payments %}
+            <table class="payment-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Plan</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for payment in payments %}
+                    <tr>
+                        <td>{{ payment.paid_at|default:payment.created_at|date:"M d, Y" }}</td>
+                        <td>${{ payment.amount|floatformat:2 }}</td>
+                        <td>{{ payment.plan|title }}</td>
+                        <td>
+                            <span class="payment-status {{ payment.status }}">
+                                {{ payment.status|title }}
+                            </span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="empty-state">
+                <div class="empty-state-icon">💳</div>
+                <p>No payments yet</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- SUBSCRIPTION MANAGEMENT -->
+        {% if subscription and subscription.status == 'active' %}
+        <div style="margin-top: 40px; text-align: center;">
+            <h3
+                style="font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--forest); margin-bottom: 16px;">
+                Manage Subscription</h3>
+            <button class="btn btn-danger" onclick="cancelSubscription()">
+                Cancel Subscription
+            </button>
+            <p style="font-size: 12px; color: var(--mist); margin-top: 12px;">
+                You can manage your subscription at any time. Changes take effect at the end of your current billing
+                period.
+            </p>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function getCsrfToken() {
+            let csrfToken = null;
+
+            // Try to get from DOM first
+            const tokenElement = document.querySelector('[name=csrfmiddlewaretoken]');
+            if (tokenElement) {
+                return tokenElement.value;
+            }
+
+            // Try to get from cookie
+            const cookies = document.cookie.split(';');
+            for (let cookie of cookies) {
+                cookie = cookie.trim();
+                if (cookie.startsWith('csrftoken=')) {
+                    csrfToken = cookie.substring('csrftoken='.length);
+                    break;
+                }
+            }
+
+            return csrfToken;
+        }
+
+        async function cancelSubscription() {
+            if (!confirm('Are you sure you want to cancel your subscription? You will lose unlimited access.')) {
+                return;
+            }
+
+            try {
+                const csrfToken = getCsrfToken();
+                const response = await fetch('/api/cancel-subscription/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken || '',
+                    },
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('✅ Subscription canceled. You can resubscribe anytime!');
+                    location.reload();
+                } else {
+                    alert('❌ Error: ' + (data.error || data.message));
+                }
+            } catch (error) {
+                alert('❌ Error canceling subscription: ' + error.message);
+            }
+        }
+    </script>
+</body>
+
+</html>

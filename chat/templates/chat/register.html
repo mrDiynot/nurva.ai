@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register — Nurva.AI</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --forest: #4B1D5A;
+            --forest-mid: #6B3D7A;
+            --cream: #F8F5F2;
+            --sand: #E8E0EA;
+            --charcoal: #1A1A1A;
+            --mist: #8A7A90;
+            --rose: #C4788A;
+            --strat: #D4A0B0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+
+        /* NAV */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(248, 245, 242, 0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(75, 29, 90, 0.1);
+            padding: 16px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--forest);
+            letter-spacing: 0.05em;
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            color: var(--rose);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--mist);
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--forest);
+        }
+
+        .nav-cta {
+            background: var(--forest);
+            color: var(--cream);
+            border: none;
+            border-radius: 24px;
+            padding: 10px 24px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+        }
+
+        .nav-cta:hover {
+            background: var(--forest-mid);
+        }
+
+        /* AUTH CONTAINER */
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--cream) 0%, #EDE5F0 100%);
+        }
+
+        .auth-box {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(75, 29, 90, 0.15);
+            padding: 60px 48px;
+            width: 100%;
+            max-width: 420px;
+            animation: fadeUp 0.6s ease both;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .auth-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--forest);
+            margin-bottom: 8px;
+        }
+
+        .auth-header p {
+            font-size: 14px;
+            color: var(--mist);
+            font-weight: 300;
+        }
+
+        /* FORM STYLES */
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--forest);
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"] {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid var(--sand);
+            border-radius: 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            color: var(--charcoal);
+            background: #FAFAF8;
+            transition: all 0.2s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--rose);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(196, 120, 138, 0.1);
+        }
+
+        input::placeholder {
+            color: var(--mist);
+        }
+
+        /* BUTTONS */
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: var(--forest);
+            color: var(--cream);
+            border: none;
+            border-radius: 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 16px;
+            box-shadow: 0 8px 24px rgba(75, 29, 90, 0.25);
+        }
+
+        .btn-submit:hover {
+            background: var(--forest-mid);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(75, 29, 90, 0.35);
+        }
+
+        /* LINK */
+        .auth-link {
+            text-align: center;
+            margin-top: 28px;
+            font-size: 13px;
+            color: var(--mist);
+        }
+
+        .auth-link a {
+            color: var(--rose);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .auth-link a:hover {
+            color: var(--forest);
+        }
+
+        /* ERROR MESSAGES */
+        .error-message {
+            background: #FEE5E5;
+            border: 1px solid #F5C6C6;
+            color: #8B3E3E;
+            padding: 12px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            animation: fadeUp 0.3s ease;
+        }
+
+        .error-list {
+            list-style: none;
+            font-size: 13px;
+        }
+
+        .error-list li {
+            margin-bottom: 6px;
+        }
+
+        /* SUCCESS MESSAGE */
+        .success-message {
+            background: #E8F5E9;
+            border: 1px solid #C8E6C9;
+            color: #2E7D32;
+            padding: 12px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            animation: fadeUp 0.3s ease;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                padding: 16px 24px;
+            }
+
+            .nav-logo {
+                font-size: 18px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .auth-box {
+                padding: 40px 28px;
+            }
+
+            .auth-header h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="{% url 'chat:home' %}" class="nav-logo">Nurva<span>.AI</span></a>
+        <ul class="nav-links">
+            <li><a href="{% url 'chat:home' %}">Home</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'chat:chatbot' %}">Chatbot</a></li>
+            <li><a href="{% url 'chat:logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'chat:login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <h1>Create Account</h1>
+                <p>Join Nurva.AI today</p>
+            </div>
+
+            {% if messages %}
+            {% for message in messages %}
+            <div class="{% if message.tags %}{{ message.tags }}-message{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            {% if errors %}
+            <div class="error-message">
+                {% for error in errors %}
+                {{ error }}<br>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <form method="POST" action="{% url 'chat:register' %}">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="first_name">Full Name</label>
+                    <input type="text" id="first_name" name="first_name" required placeholder="Enter your full name"
+                        value="{{ first_name }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email"
+                        value="{{ email }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required placeholder="Choose a username"
+                        value="{{ username }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="password1">Password</label>
+                    <input type="password" id="password1" name="password1" required placeholder="Create a password">
+                </div>
+
+                <div class="form-group">
+                    <label for="password2">Confirm Password</label>
+                    <input type="password" id="password2" name="password2" required placeholder="Confirm your password">
+                </div>
+
+                <button type="submit" class="btn-submit">Create Account</button>
+            </form>
+
+            <div class="auth-link">
+                Already have an account? <a href="{% url 'chat:login' %}">Sign in</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
