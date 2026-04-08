@@ -1,0 +1,27 @@
+[Unit]
+Description=Nurva AI Gunicorn Application Server
+After=network.target
+
+[Service]
+Type=notify
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/nurva
+Environment="PATH=/var/www/nurva/venv/bin"
+ExecStart=/var/www/nurva/venv/bin/gunicorn \
+    --workers 4 \
+    --worker-class sync \
+    --bind unix:/run/gunicorn.sock \
+    --timeout 30 \
+    --access-logfile - \
+    --error-logfile - \
+    nurva_config.wsgi:application
+
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+KillSignal=SIGTERM
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
